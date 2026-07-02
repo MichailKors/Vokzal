@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Центральный вокзал</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="page-shell">
+    <header class="header">
+        <a class="logo" href="{{ url_for('index') }}">
+            <span class="logo-mark">🚆</span>
+            <span>ЦЕНТРАЛЬНЫЙ<br>ВОКЗАЛ</span>
+        </a>
+        <nav class="nav">
+            <a class="{{ 'active' if active == 'home' else '' }}" href="{{ url_for('index') }}">Главная</a>
+            <a class="{{ 'active' if active == 'buy' else '' }}" href="{{ url_for('buy') }}">Купить билет</a>
+            <a class="{{ 'active' if active == 'profile' else '' }}" href="{{ url_for('profile') if current_user else url_for('auth') }}">Профиль</a>
+            <a class="{{ 'active' if active == 'routes' else '' }}" href="{{ url_for('routes') }}">Маршруты</a>
+            <a class="{{ 'active' if active == 'return' else '' }}" href="{{ url_for('return_ticket') }}">Возврат</a>
+            <a class="{{ 'active' if active == 'tickets' else '' }}" href="{{ url_for('my_tickets') }}">Мои билеты</a>
+        </nav>
+        {% if current_user %}
+            <a class="login-btn" href="{{ url_for('logout') }}">♙ Выйти</a>
+        {% else %}
+            <a class="login-btn" href="{{ url_for('auth') }}">♙ Войти / Регистрация</a>
+        {% endif %}
+    </header>
+    <main class="content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-wrap">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+    {% if auth_required %}
+        <div class="auth-modal-backdrop">
+            <div class="auth-modal">
+                <a class="modal-close" href="{{ url_for('buy') }}">×</a>
+                <p>{{ auth_message or 'Уважаемый пользователь! Сначала нужно войти или зарегистрироваться.' }}</p>
+                <a class="primary" href="{{ url_for('auth') }}">OK</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+</body>
+</html>

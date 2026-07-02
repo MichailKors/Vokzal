@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+    <h1>Путешествуйте<br>с комфортом</h1>
+    <p>Быстрый поиск билетов и актуальное расписание поездов в<br>любую точку страны.</p>
+</section>
+<section class="board card-wide">
+    <h3>ⓘ Онлайн табло</h3>
+    <div class="tabs"><span class="active-tab">Отправление</span><span>Прибытие</span></div>
+    <table>
+        <thead><tr><th>Номер поезда</th><th>Маршрут</th><th>Время</th><th>Платформа</th><th>Статус</th></tr></thead>
+        <tbody>
+        {% for train in trains %}
+            <tr>
+                <td class="train-num">{{ train.number }}</td><td>{{ train.route }}</td><td>◷ {{ train.time }}</td><td>{{ train.platform }}</td>
+                <td><span class="status {{ train.kind }}">{{ train.status }}</span></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

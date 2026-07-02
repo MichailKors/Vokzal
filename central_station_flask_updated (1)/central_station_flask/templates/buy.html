@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="title-block">
+    <h1>Покупка билета</h1>
+    <p>Всего 5 шагов до вашего путешествия</p>
+</section>
+<form method="post" class="search-card">
+    <h3>⌕ Поиск железнодорожных билетов</h3>
+    <div class="grid-form">
+        <label>Откуда<input name="where_from" placeholder="Москва" value="Москва" required></label>
+        <label>Куда<input name="to" placeholder="Санкт-Петербург" value="Санкт-Петербург" required></label>
+        <label>Дата поездки<input name="date_of_trip" type="date" required></label>
+        <label>Имя<input name="name" placeholder="Иван" value="{{ current_user.name if current_user else 'Иван' }}" required></label>
+        <label>Фамилия<input name="surname" placeholder="Иванов" value="{{ current_user.surname if current_user else 'Иванов' }}" required></label>
+        <div class="actions-row">
+            <button class="outline" name="save_route" value="1" type="submit">Сохранить<br>маршрут</button>
+            <button class="primary" type="submit">Купить билет</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

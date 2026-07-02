@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="list-page">
+    <h1>Возврат билета</h1>
+    <h3>Активные поездки</h3>
+    {% if tickets %}
+        {% for ticket in tickets %}
+            <div class="ticket-card item-card red-border">
+                <div class="ticket-main">
+                    <b>› {{ ticket.where_from }}</b><span>› {{ ticket.to }}</span>
+                    <small>▧ {{ ticket.date_of_trip }} в {{ ticket.time }} <em>{{ ticket.train }}</em></small>
+                </div>
+                <b class="price">{{ ticket.price }}₽</b>
+                <form method="post" action="{{ url_for('delete_ticket', ticket_id=ticket.id) }}"><button class="danger">Вернуть билет</button></form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="empty">Активных поездок нет</p>
+    {% endif %}
+</section>
+{% endblock %}

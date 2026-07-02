@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="list-page tickets-page">
+    <h1>Мои билеты</h1>
+    {% if tickets %}
+        {% for ticket in tickets %}
+            {% include 'ticket_card.html' %}
+        {% endfor %}
+    {% else %}
+        <p class="empty">Билетов нет</p>
+    {% endif %}
+</section>
+{% endblock %}

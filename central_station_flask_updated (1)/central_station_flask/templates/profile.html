@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="profile-wrap">
+    <div class="profile-card">
+        <div class="avatar">♙</div>
+        <div><h1>{{ current_user.name }} {{ current_user.surname }}</h1><p>{{ current_user.email }}</p></div>
+    </div>
+    <form method="post" class="profile-form">
+        <label>Изменить имя<input name="name" placeholder="Введите новое имя" value="{{ current_user.name }}"></label>
+        <label>Изменить фамилию<input name="surname" placeholder="Введите новую фамилию" value="{{ current_user.surname }}"></label>
+        <label>Привяжите другую электронную почту<input name="email" placeholder="Введите электронную почту" value="{{ current_user.email }}"></label>
+        <label>Привяжите номер телефона<input name="phone" placeholder="Введите номер телефона" value="{{ current_user.phone }}"></label>
+        <button class="outline profile-submit" type="submit">Редактировать<br>профиль</button>
+    </form>
+</section>
+{% endblock %}

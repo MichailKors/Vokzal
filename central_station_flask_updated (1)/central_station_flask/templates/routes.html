@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="list-page">
+    <h1>Мои Маршруты</h1>
+    <div class="tabs"><span class="active-tab">⌕ Сохраненные</span></div>
+    {% if routes %}
+        {% for route in routes %}
+        <div class="route-card item-card blue-border">
+            <div><b>› {{ route.where_from }}</b><span>› {{ route.to }}</span></div>
+            <form method="post" action="{{ url_for('delete_route', route_id=route.id) }}"><button class="danger">Удалить маршрут</button></form>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="empty">Сохраненных маршрутов нет</p>
+    {% endif %}
+</section>
+{% endblock %}
